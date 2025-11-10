@@ -1,4 +1,9 @@
+"use client";
+import { Agents } from "./_component/Agents";
+import { Buttons } from "./_component/Buttons";
 import { HouseCard } from "./_component/HouseCard";
+import { Offers } from "./_component/Offers";
+import { Pros } from "./_component/Pros";
 
 const houseData = [
   {
@@ -51,7 +56,75 @@ const houseData = [
   },
 ];
 
-const buttons = [{ buttonText: "House" }];
+const OffersData = [
+  {
+    numbers: "1",
+    offer: "Browse Curated Homes",
+    details:
+      "Explore our carefully selected collection of properties that match your lifestyle and budget. Every listing is verified and includes detailed information.",
+  },
+  {
+    numbers: "3",
+    offer: "Browse Curated Homes",
+    details:
+      "Explore our carefully selected collection of properties that match your lifestyle and budget. Every listing is verified and includes detailed information.",
+  },
+  {
+    numbers: "2",
+    offer: "Browse Build a Tour Homes",
+    details:
+      "Explore our Schedule viewings at your convenience and visit multiple properties in one trip. Our team coordinates everything to save you time. selected collection of properties that match your lifestyle and budget. Every listing is verified and includes detailed information.",
+  },
+
+  {
+    numbers: "4",
+    offer: "Offer & Close",
+    details:
+      "Make confident offers with our support and navigate the closing process smoothly. We handle the paperwork so you can focus on moving in.",
+  },
+];
+
+const buttons = [
+  {
+    buttonText: "House",
+    isActive: true,
+  },
+  {
+    buttonText: "Villa",
+    isActive: false,
+  },
+  {
+    buttonText: "Apartment",
+    isActive: false,
+  },
+];
+
+const agents = [
+  {
+    image: "/agents/agent1.jpg",
+    name: "Micheal Chen",
+    occupation: "Senior Real Estate Agent",
+    numberOfSold: "24 properties sold",
+  },
+  {
+    image: "/agents/agent2.jpg",
+    name: "David Martinez",
+    occupation: "Property Specialist",
+    numberOfSold: "18 properties sold",
+  },
+  {
+    image: "/agents/agent3.jpg",
+    name: "Investment Advisor",
+    occupation: "Investment Advisor",
+    numberOfSold: "32 properties sold",
+  },
+  {
+    image: "/agents/agent4.jpg",
+    name: "Robert Thompson",
+    occupation: "Luxury Home Expert",
+    numberOfSold: "28 properties sold",
+  },
+];
 
 export default function Home() {
   return (
@@ -120,17 +193,28 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="w-screen h-[474px] border-2 border-black bg-[#F9FAFB] flex items-center flex-col pb-10 pt-10">
-        <div>
-          {" "}
-          <p className="color-[#4A5565] text-x1">
+      <div className="w-screen h-[474px] bg-[#F9FAFB] flex items-center flex-col pb-10 pt-10 gap-6 mb-[107px]">
+        <div className="w-[213px] flex justify-center items-center">
+          <p className="text-[#0A0A0A] font-medium text-[20px] text-center">
             Buying Doesn't Have to Be Overwhelming
           </p>
         </div>
-        <p className="color-[#4A5565] text-base">
+        <p className="text-[#4A5565] font-normal text-base">
           Our streamlined process makes finding your dream home simple and
           stress-free
         </p>
+        <div className="w-7xl h-[246px] grid grid-cols-2 grid-rows-2 gap-8">
+          {OffersData.map((item, index) => {
+            return (
+              <Offers
+                key={index}
+                numbers={item.numbers}
+                offer={item.offer}
+                details={item.details}
+              />
+            );
+          })}
+        </div>
       </div>
       <div className="w-screen h-fit flex flex-col items-center">
         <div>
@@ -138,7 +222,18 @@ export default function Home() {
             ExploreProperties
           </p>
         </div>
-        <div className="w-7xl items-center grid grid-cols-3 grid-rows-2 gap-x-7 gap-y-6 px-20">
+        <div className="flex flex-row gap-2 h-[92px]">
+          {buttons.map((el, i) => {
+            return (
+              <Buttons
+                key={i}
+                isActive={el.isActive}
+                buttonText={el.buttonText}
+              />
+            );
+          })}
+        </div>
+        <div className="w-7xl items-center grid grid-cols-3 grid-rows-2 gap-x-7 gap-y-6">
           {houseData.map((item, index) => {
             return (
               <HouseCard
@@ -153,6 +248,36 @@ export default function Home() {
             );
           })}
         </div>
+      </div>
+      <div className="w-7xl h-[686px] flex flex-col justify-self-center items-center bg-[#F9FAFB] ">
+        <div className="w-[178px] h-fit flex flex-wrap justify-center">
+          <p className="text-xl text-[#0A0A0A] font-normal pt-10 text-center">
+            Meet the People Behind the Process
+          </p>
+        </div>
+        <p className="text-[#4A5565] font-normal text-base pt-4">
+          Our experienced team is dedicated to helping you find your perfect
+          home
+        </p>
+        <div className="w-7xl h-fit flex flex-row justify-center gap-6 pt-10 pb-11">
+          {agents.map((item, index) => {
+            return (
+              <Agents
+                key={index}
+                image={item.image}
+                name={item.name}
+                occupation={item.occupation}
+                numberOfSold={item.numberOfSold}
+              />
+            );
+          })}
+        </div>
+        <button className="w-[140.34] h-9 bg-[#FF6900] rounded-lg">
+          Meet the team
+        </button>
+      </div>
+      <div className="w-fit h-fit flex justify-center items-center">
+        <Pros />
       </div>
     </div>
   );
